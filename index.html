@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chúc mừng 20/10 💖</title>
+  <meta name="description" content="Một món quà nhỏ xinh dành tặng em nhân ngày 20/10">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="floaty" aria-hidden="true"></div>
+  <button id="musicBtn" class="music-btn" aria-label="Bật/tắt nhạc">🎵</button>
+  <audio id="bgm" loop preload="auto"></audio>
+
+  <!-- ===== Màn 1: Câu hỏi + nút "Không" biết chạy ===== -->
+  <section class="stage active" id="stage-question">
+    <div class="card">
+      <div class="badge">💐 20 • 10 💐</div>
+      <svg id="bear" class="bear" viewBox="0 0 200 230" aria-hidden="true">
+        <circle cx="50" cy="52" r="26" fill="#c68b59"/>
+        <circle cx="150" cy="52" r="26" fill="#c68b59"/>
+        <circle cx="50" cy="52" r="14" fill="#f6c5a8"/>
+        <circle cx="150" cy="52" r="14" fill="#f6c5a8"/>
+        <circle cx="100" cy="105" r="72" fill="#d9a066"/>
+        <ellipse class="blush" cx="58" cy="124" rx="13" ry="8" fill="#ff8fab"/>
+        <ellipse class="blush" cx="142" cy="124" rx="13" ry="8" fill="#ff8fab"/>
+        <g class="eye"><circle cx="72" cy="96" r="9" fill="#2b1a10"/><circle cx="75" cy="92" r="3" fill="#fff"/></g>
+        <g class="eye"><circle cx="128" cy="96" r="9" fill="#2b1a10"/><circle cx="131" cy="92" r="3" fill="#fff"/></g>
+        <ellipse class="tear" cx="70" cy="112" rx="4" ry="7" fill="#7cc7ff"/>
+        <ellipse cx="100" cy="132" rx="32" ry="24" fill="#f6dcc0"/>
+        <ellipse cx="100" cy="120" rx="10" ry="7" fill="#4a2c1a"/>
+        <path class="mouth-happy" d="M88 136 Q100 150 112 136" stroke="#4a2c1a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path class="mouth-sad" d="M88 145 Q100 133 112 145" stroke="#4a2c1a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <g class="bear-heart">
+          <path d="M100 226 C70 206 50 190 62 170 C72 155 92 158 100 172 C108 158 128 155 138 170 C150 190 130 206 100 226Z" fill="#ff4d79"/>
+          <circle cx="66" cy="192" r="11" fill="#c68b59"/>
+          <circle cx="134" cy="192" r="11" fill="#c68b59"/>
+        </g>
+      </svg>
+      <h1 class="q-title">Chào <span data-her-real></span> <span data-her></span> bé bỏng của anh 👋</h1>
+      <p id="question" class="question"></p>
+      <div class="btn-row">
+        <button id="yesBtn" class="btn btn-yes">Có 💖</button>
+        <button id="noBtn" class="btn btn-no">Không 😤</button>
+      </div>
+      <p id="qHint" class="hint"></p>
+    </div>
+  </section>
+
+  <!-- ===== Màn 2: Phong thư ===== -->
+  <section class="stage" id="stage-envelope">
+    <h2 class="title">Có thư gửi <span data-her></span> nè 💌</h2>
+    <div class="envelope" id="envelope" role="button" aria-label="Mở thư">
+      <div class="env-back"></div>
+      <div class="env-letter"><span>For you 💕</span></div>
+      <div class="env-front"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">💗</div>
+    </div>
+    <p class="hint">Chạm vào phong thư để mở nha ✨</p>
+  </section>
+
+  <!-- ===== Màn 3: Lá thư gõ chữ ===== -->
+  <section class="stage" id="stage-letter">
+    <div class="letter" id="letter">
+      <h2 id="letterTitle"></h2>
+      <div id="letterBody"></div>
+      <p class="sign" id="letterSign" hidden></p>
+    </div>
+    <p class="hint" id="skipHint">Chạm vào lá thư để đọc nhanh 💨</p>
+    <button class="btn btn-yes" id="toHeart" hidden>Tiếp nè 💓</button>
+  </section>
+
+  <!-- ===== Màn 4: Trái tim hạt + bộ đếm ===== -->
+  <section class="stage" id="stage-heart">
+    <div id="stars" aria-hidden="true"></div>
+    <p class="heart-cap">I love you chụt chụt 💓</p>
+    <div class="heart-wrap">
+      <canvas id="heartCanvas"></canvas>
+      <div class="heart-name">
+        <span class="name" data-her-real></span>
+        <span class="ily">I love you 3000 ♡</span>
+      </div>
+    </div>
+    <p class="counter-label">Mình đã thương nhau được</p>
+    <p class="counter" id="counter"></p>
+    <button class="btn btn-yes" id="toGifts">Mở quà nè 🎁</button>
+  </section>
+
+  <!-- ===== Màn 5: Hộp quà ===== -->
+  <section class="stage" id="stage-gifts">
+    <h2 class="title">Quà 20/10 cho <span data-her-real></span> 🎀</h2>
+    <p class="hint">Chạm vào từng hộp quà để mở nhé</p>
+    <div class="gifts" id="gifts"></div>
+    <button class="btn btn-yes" id="toFinal" hidden>Còn một điều nữa... 💗</button>
+  </section>
+
+  <!-- ===== Màn 6: Kết ===== -->
+  <section class="stage" id="stage-final">
+    <div class="big-flower">💐</div>
+    <h1 class="final-title">Chúc mừng 20/10</h1>
+    <div class="polaroid" id="polaroid" hidden>
+      <img id="photo" alt="Tụi mình">
+      <span>Tụi mình 💕</span>
+    </div>
+    <p class="final-msg" id="finalMsg"></p>
+    <p class="sign center"><span data-me></span> yêu <span data-her-real></span> nhất trên đời 💖</p>
+    <button class="btn btn-no" id="replay">Xem lại từ đầu 🔁</button>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
